@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Question List</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/bootstrap.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/question_list.css' %}"
+    />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+      </ul>
+    </nav>
+
+    {% for question in questions %}
+    <div class="question">
+      <h3>
+        <a href="{% url 'QuestionAnswer:question_detail' question.id %}"
+          >{{ question.title }}</a
+        >
+      </h3>
+      <p>{{ question.content }}</p>
+      <a
+        href="{% url 'QuestionAnswer:answer_question' question.id %}"
+        class="btn btn-primary"
+        >Answer Question</a
+      >
+    </div>
+    {% empty %}
+    <p>No questions available.</p>
+    {% endfor %}
+
+    <a href="{% url 'QuestionAnswer:create_question' %}" class="btn btn-primary"
+      >Create Question</a
+    >
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+    <script src="{% static 'js/question_list.js' %}"></script>
+  </body>
+</html>

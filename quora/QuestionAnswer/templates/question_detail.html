@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Question Detail</title>
+    <link rel="stylesheet" href="{% static 'question_detail.css' %}" />
+  </head>
+  <body>
+    <div class="question">
+      <h2>{{ question.title }}</h2>
+      <p>{{ question.content }}</p>
+    </div>
+
+    <div class="answers">
+      <h3>Answers:</h3>
+      {% for answer in answers %}
+      <div class="answer">
+        <p>{{ answer.content }}</p>
+        <p>
+          Likes: {{ answer.likes.count }} Unlikes: {{ answer.unlikes.count }}
+        </p>
+        {% if user.is_authenticated %}
+        <form
+          action="{% url 'QuestionAnswer:like_answer' answer.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <button
+            type="submit"
+            {%
+            if
+            user
+            in
+            answer.likes.all
+            %}disabled{%
+            endif
+            %}
+          >
+            Like
+          </button>
+        </form>
+        <form
+          action="{% url 'QuestionAnswer:unlike_answer' answer.id %}"
+          method="POST"
+        >
+          {% csrf_token %}
+          <button
+            type="submit"
+            {%
+            if
+            user
+            in
+            answer.unlikes.all
+            %}disabled{%
+            endif
+            %}
+          >
+            Unlike
+          </button>
+        </form>
+        {% else %}
+        <a href="{% url 'login' %}">Login to Like/Unlike</a>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="buttons">
+      <a
+        href="{% url 'QuestionAnswer:answer_question' question.id %}"
+        class="btn"
+      >
+        Answer Question
+      </a>
+      <a href="{% url 'QuestionAnswer:question_list' %}" class="btn">Back</a>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var buttons = document.getElementsByClassName("btn");
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].classList.add("rotateY-animation");
+        }
+      });
+    </script>
+  </body>
+</html>

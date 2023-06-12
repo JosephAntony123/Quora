@@ -1,0 +1,33 @@
+
+form {
+    margin-bottom: 20px;
+}
+
+form button[type="submit"] {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+
+@keyframes rotateX {
+    0% {
+        transform: rotateX(0);
+    }
+
+    100% {
+        transform: rotateX(360deg);
+    }
+}
+
+.rotateX-animation {
+    animation: rotateX 2s infinite linear;
+}

@@ -1,0 +1,41 @@
+
+.question {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.question h3 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.question p {
+    margin-bottom: 10px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+
+@keyframes rotateY {
+    0% {
+        transform: rotateY(0);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.rotateY-animation {
+    animation: rotateY 2s infinite linear;
+}
